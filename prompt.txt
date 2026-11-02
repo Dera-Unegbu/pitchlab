@@ -1,0 +1,167 @@
+Product Architecture & Specification: PitchLabPitchLab is an AI-powered peer-review community platform designed for founders, developers, and creators to share startup pitches, receive structured feedback, build relationships, and iterate rapidly.1. Executive Summary & Core PillarsValue PropositionPitchLab turns passive pitch viewing into an active, AI-orchestrated feedback engine. Rather than leaving unstructured comments, reviewers provide categorised insights that AI synthesises into actionable product roadmaps for builders.Core PillarsTargeted Peer Review: Categorised public feedback loops (UI/UX, Business Model, Tech Stack, Growth).AI Synthesis & Moderation: Automated sentiment check, quality gatekeeping, and multi-comment consensus summaries.Low-Friction Networking: 1-click builder following and context-aware private messaging threads.Product-Led Growth CTA: Built-in voting mechanism that converts active user delight into contest votes.2. Technical System Architecture                                 ┌─────────────────────────────────┐
+                                 │       TatbiQ Frontend UI        │
+                                 │ (Tailwind CSS + React State)    │
+                                 └───────────────┬─────────────────┘
+                                                 │
+                        ┌────────────────────────┴────────────────────────┐
+                        ▼                                                 ▼
+        ┌───────────────────────────────┐                 ┌───────────────────────────────┐
+        │       Relational Data         │                 │         AI Engine             │
+        │   (Users, Pitches, Comments,  │                 │  (Moderation, Synthesis,      │
+        │     Messages, Follows)        │                 │    Smart Prompts)             │
+        └───────────────────────────────┘                 └───────────────────────────────┘
+3. Comprehensive Data SchemaSQL-- 1. Users Table
+CREATE TABLE users (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    full_name VARCHAR(100) NOT NULL,
+    handle VARCHAR(50) UNIQUE NOT NULL,
+    avatar_url TEXT,
+    bio TEXT,
+    headline VARCHAR(150), -- e.g., "Full-Stack Developer | Building AI Tools"
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 2. Pitches Table
+CREATE TABLE pitches (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    builder_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    title VARCHAR(150) NOT NULL,
+    tagline VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    demo_url TEXT,
+    video_embed_url TEXT,
+    category VARCHAR(50) NOT NULL, -- "AI/ML", "SaaS", "Mobile", "Developer Tools"
+    stage VARCHAR(50) DEFAULT 'Idea', -- "Idea", "MVP", "Beta", "Live"
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 3. Comments Table (Public Feedback)
+CREATE TABLE comments (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    pitch_id UUID REFERENCES pitches(id) ON DELETE CASCADE,
+    author_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    category VARCHAR(50) NOT NULL, -- "UI/UX", "Business Model", "Tech Stack", "General"
+    content TEXT NOT NULL,
+    is_ai_approved BOOLEAN DEFAULT TRUE,
+    upvotes INT DEFAULT 0,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 4. Messages Table (Private Builder-to-Reviewer Threads)
+CREATE TABLE messages (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    pitch_id UUID REFERENCES pitches(id) ON DELETE CASCADE,
+    sender_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    recipient_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    content TEXT NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 5. Follows Table (Network Graph)
+CREATE TABLE follows (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    follower_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    builder_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(follower_id, builder_id)
+);
+
+-- 6. Votes Table (Growth Engine Tracking)
+CREATE TABLE competition_votes (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    voter_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    source_trigger VARCHAR(50), -- "post_comment", "post_pitch", "header_cta"
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+4. AI Orchestration & Logic SpecificationsModule A: Real-Time Comment Moderation & Auto-TaggingTrigger: User submits a comment on a pitch.Logic: Analyzes content for toxicity, unhelpful fluff (e.g., "cool app"), or hostile critique.System Prompt:PlaintextYou are the PitchLab AI Quality Guard. Analyze the submitted peer review text.
+Evaluate against two criteria:
+1. Constructiveness (0-10): Must offer actionable feedback, questions, or specific UI/UX/Business critique.
+2. Toxicity Check (Pass/Fail): Must not contain abusive language or low-effort spam.
+
+If constructive, categorize as one of: ["UI/UX", "Business Model", "Tech Stack", "General"].
+Return JSON:
+{
+  "approved": boolean,
+  "category": "string",
+  "constructiveness_score": number,
+  "moderation_reason": "string"
+}
+Module B: Pitch Feedback Consensus SynthesizerTrigger: Rendered at the top of a pitch detail view when total comments $\ge 3$.Logic: Aggregates all public feedback into structured takeaways for the builder.System Prompt:PlaintextYou are an expert Startup Advisor. Read the provided list of peer review comments for the pitch titled "{{pitch_title}}".
+
+Summarize the consensus into three strict categories:
+1. Top Strengths (What reviewers love)
+2. High-Priority UX/Product Risks (Common flaws mentioned)
+3. Suggested Next Steps (Actionable iterations)
+
+Keep the tone encouraging, crisp, and concise (bullet points only).
+Module C: DM Contextual Conversation StarterTrigger: Builder clicks "Reply Privately" on a user's comment.Logic: Generates 2 targeted follow-up questions to initiate the 1-on-1 private chat thread.System Prompt:PlaintextContext: A reviewer posted this comment on pitch "{{pitch_title}}":
+"{{comment_text}}"
+
+Generate 2 short, natural follow-up questions that the founder can ask this reviewer in a private message to dig deeper into their feedback.
+5. UI Layout & View Architecture┌────────────────────────────────────────────────────────────────────────────────────────┐
+│ NAVBAR:  [ PitchLab Logo ]   [ Explore ]  [ Following ]       [ + Submit Pitch ] [ 🏆 Vote ] │
+├────────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                        │
+│  LEFT COLUMN (Pitches Feed - 65%)           RIGHT COLUMN (Sidebar - 35%)               │
+│  ┌──────────────────────────────────────┐   ┌────────────────────────────────────────┐ │
+│  │ Pitch Card                           │   │ Top Builders to Follow                 │ │
+│  │ ┌──────────────────────────────────┐ │   │ ┌────────────────────────────────────┐ │ │
+│  │ │ Video / Image Embed             │ │   │ │ Builder Name | 142 Followers       │ │ │
+│  │ └──────────────────────────────────┘ │   │ │ [+ Follow]                           │ │ │
+│  │ Title & Tagline                      │   │ └────────────────────────────────────┘ │ │
+│  │ Category Badges | Stage | [+ Follow] │   ├────────────────────────────────────────┤ │
+│  │                                      │   │ AI Competition Callout                 │ │
+│  │ 🤖 AI Synthesis Box                  │   │ "Loving PitchLab? Support our build    │ │
+│  │ • Strength: Clean architecture       │   │ with a 1-click vote!"                  │ │
+│  │ • Risk: Unclear monetization         │   │ [ ⭐ Vote for PitchLab ]                │ │
+│  │                                      │   └────────────────────────────────────────┘ │
+│  │ 💬 Structured Comments (Tabs)        │                                              │
+│  │ [All] [UI/UX] [Business] [Tech]      │                                              │
+│  │ ┌──────────────────────────────────┐ │                                              │
+│  │ │ User Comment | UI/UX Badge       │ │                                              │
+│  │ │ "Consider changing primary CTA..."│ │                                              │
+│  │ │ [Reply Privately ✉️] [Upvote 🔼] │ │                                              │
+│  │ └──────────────────────────────────┘ │                                              │
+│  └──────────────────────────────────────┘                                              │
+└────────────────────────────────────────────────────────────────────────────────────────┘
+6. Detailed Feature SpecificationsFeature ModuleKey UI ElementsUser Interaction & FlowBackend/State ActionPitch Feed & DiscoveryDual Tabs: Explore vs Following. Category Filters (AI, SaaS, DevTools).Clicking tabs filters pitch list. Clicking pitch opens deep-dive modal or detail page.Query pitches table filtered by category or follows table relationship.Simple Follow System+ Follow toggle button on Pitch Cards and User Profiles.Click changes state to ✓ Following immediately (optimistic UI update).Inserts/deletes record in follows table (follower_id, builder_id).Structured CommentsCategory Selector dropdown (UI/UX, Business, Tech), Textarea, Submit button.User posts feedback. AI checks constructiveness. If approved, renders under selected tag.AI API call -> insert into comments table -> append to public feed.Private DM DrawerSlide-over drawer/modal containing message history and AI prompt chips.Click "Reply Privately" on a comment $\rightarrow$ Drawer opens with recipient pre-selected.Query messages table where pitch_id matches and parties match.Viral Voting MechanismTopbar Badge, Post-Action Toast, Sidebar Card.Click ⭐ Vote trigger $\rightarrow$ Opens TatbiQ vote link in new tab, updates vote state.Log action to competition_votes table. Display thank-you confirmation toast.7. Master TatbiQ Implementation PromptCopy and paste the exact prompt below into TatbiQ AI to generate the complete foundation:PlaintextBuild a full-stack web application called "PitchLab" — an AI-powered startup pitch peer-review network built for the TatbiQ competition.
+
+### Key Functional Requirements:
+
+1. DATA MODELS & RELATIONS:
+   - Users: id, name, handle, avatar, bio, headline.
+   - Pitches: id, builder_id, title, tagline, description, video_url, category, stage, created_at.
+   - Comments: id, pitch_id, author_id, category ("UI/UX", "Business Model", "Tech Stack", "General"), content, created_at.
+   - Messages: id, pitch_id, sender_id, recipient_id, content, created_at.
+   - Follows: id, follower_id, builder_id.
+   - CompetitionVotes: id, voter_id, source_trigger, created_at.
+
+2. CORE SCREENS & NAVIGATION:
+   - Navbar: Logo ("PitchLab"), Navigation links ("Explore", "Following"), "+ Submit Pitch" button, and a prominent glowing button "⭐ Vote for PitchLab".
+   - Pitch Discovery Feed:
+     - Header filters: All Categories, SaaS, AI/ML, DevTools, Mobile.
+     - Toggle tabs: "All Pitches" vs "Following Feed".
+     - Pitch Cards: Render title, tagline, stage badge, category badge, builder avatar, and a "+ Follow" button.
+   - Pitch Detail View:
+     - Main pitch details, demo link, description.
+     - AI Feedback Summary Box: Display 3 AI-generated bullet points summarizing reviewer consensus (Strengths, UX Risks, Next Steps).
+     - Structured Comments Section: Filter comments by category tags (UI/UX, Business, Tech). Form to submit structured comments with tag selection.
+     - Comment Card Actions: Upvote button and a "Reply Privately ✉️" button.
+   - Private Messaging Drawer:
+     - Triggered when clicking "Reply Privately" on a comment.
+     - Displays 1-on-1 thread between Pitch Builder and Comment Author attached to that pitch.
+     - Includes 2 clickable AI-suggested conversation starter chips above the text input.
+
+3. AI LOGIC INTEGRATION:
+   - Comment Moderation: When a comment is submitted, send text to AI to verify constructiveness and auto-categorize if untagged.
+   - Feedback Synthesis: Dynamically summarize pitch comments into 3 takeaways when 3+ comments exist.
+   - DM Assistant: Generate 2 short follow-up questions when a founder opens a private thread with a reviewer.
+
+4. GROWTH & VOTING INTEGRATION:
+   - Display a high-converting notification toast after a user posts a comment or pitch: "Enjoying PitchLab? Help us win TatbiQ with a 1-click vote!" with a primary CTA button linking to the vote URL.
+   - Include a live voter counter in the sidebar.
+
+5. DESIGN & STYLING:
+   - Clean, modern, dark-mode technical aesthetic (slate/zinc background, indigo/violet primary accents, crisp typography, sleek borders)
+
+6. Also include in the voting link it will be : https://tatbiq.ai/dubai-ai-festival/entry/"name of the project" e.g pitchlab-community-777777

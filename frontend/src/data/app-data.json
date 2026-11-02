@@ -1,0 +1,306 @@
+{
+  "currentUser": {
+    "id": "user-current",
+    "fullName": "Maya Chen",
+    "handle": "maya-builds",
+    "avatarUrl": "https://images.unsplash.com/photo-1758691737644-ef8be18256c3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTEwMDV8MHwxfHNlYXJjaHwxfHxmb3VuZGVyJTIwcG9ydHJhaXQlMjBvZmZpY2V8ZW58MXwwfHx8MTc5MzE4NjUxNnww&ixlib=rb-4.1.0&q=80&w=1080",
+    "bio": "Founder building tools for sharper product feedback loops.",
+    "headline": "AI product systems founder"
+  },
+  "assets": {
+    "heroImage": "https://images.unsplash.com/photo-1587440871875-191322ee64b0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTEwMDV8MHwxfHNlYXJjaHwxfHxwcm9kdWN0JTIwZGVzaWduJTIwdGVhbXxlbnwxfDB8fHwxNzkzMTg2NTE2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+    "developerImage": "https://images.unsplash.com/photo-1587620962725-abab7fe55159?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTEwMDV8MHwxfHNlYXJjaHwxfHxkZXZlbG9wZXIlMjBjb2RpbmclMjBsYXB0b3B8ZW58MXwwfHx8MTc5MzE4NjUxNnww&ixlib=rb-4.1.0&q=80&w=1080",
+    "founderImage": "https://images.unsplash.com/photo-1758691737644-ef8be18256c3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTEwMDV8MHwxfHNlYXJjaHwxfHxmb3VuZGVyJTIwcG9ydHJhaXQlMjBvZmZpY2V8ZW58MXwwfHx8MTc5MzE4NjUxNnww&ixlib=rb-4.1.0&q=80&w=1080",
+    "pitchImage": "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTEwMDV8MHwxfHNlYXJjaHwxfHxzdGFydHVwJTIwcGl0Y2glMjBwcmVzZW50YXRpb258ZW58MXwwfHx8MTc5MzE4NjUxNnww&ixlib=rb-4.1.0&q=80&w=1080",
+    "meetupImage": "https://images.unsplash.com/photo-1675716921224-e087a0cca69a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTEwMDV8MHwxfHNlYXJjaHwxfHxuZXR3b3JraW5nJTIwbWVldGVuZGVyc3xZW58MXwwfHx8MTc5MzE4NjUxNnww&ixlib=rb-4.1.0&q=80&w=1080"
+  },
+  "users": [
+    {
+      "id": "user-aria",
+      "fullName": "Aria Patel",
+      "handle": "ariap",
+      "avatarUrl": "https://images.unsplash.com/photo-1758691737644-ef8be18256c3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTEwMDV8MHwxfHNlYXJjaHwxfHxmb3VuZGVyJTIwcG9ydHJhaXQlMjBvZmZpY2V8ZW58MXwwfHx8MTc5MzE4NjUxNnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "bio": "Former product lead turning messy customer calls into roadmap clarity.",
+      "headline": "Founder, PulseDesk",
+      "followers": 4820,
+      "trend": "+18% review quality this week"
+    },
+    {
+      "id": "user-omar",
+      "fullName": "Omar Haddad",
+      "handle": "omarh",
+      "avatarUrl": "https://images.unsplash.com/photo-1675716921224-e087a0cca69a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTEwMDV8MHwxfHNlYXJjaHwxfHxuZXR3b3JraW5nJTIwbWVldHVwJTIwZm91bmRlcnN8ZW58MXwwfHx8MTc5MzE4NjUxNnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "bio": "Developer advocate building high-signal infrastructure tools.",
+      "headline": "Builder, StackLens",
+      "followers": 3910,
+      "trend": "+11% founder replies"
+    },
+    {
+      "id": "user-lena",
+      "fullName": "Lena Brooks",
+      "handle": "lenab",
+      "avatarUrl": "https://images.unsplash.com/photo-1587440871875-191322ee64b0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTEwMDV8MHwxfHNlYXJjaHwxfHxwcm9kdWN0JTIwZGVzaWduJTIwdGVhbXxlbnwxfDB8fHwxNzkzMTg2NTE2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "bio": "Design systems specialist helping small teams ship polished mobile flows.",
+      "headline": "Co-founder, FlowMint",
+      "followers": 5280,
+      "trend": "+26% helpful comments"
+    },
+    {
+      "id": "user-noah",
+      "fullName": "Noah Kim",
+      "handle": "noahk",
+      "avatarUrl": "https://images.unsplash.com/photo-1587620962725-abab7fe55159?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTEwMDV8MHwxfHNlYXJjaHwxfHxkZXZlbG9wZXIlMjBjb2RpbmclMjBsYXB0b3B8ZW58MXwwfHx8MTc5MzE4NjUxNnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "bio": "ML engineer focused on operational intelligence for distributed teams.",
+      "headline": "Founder, ModelOps Radar",
+      "followers": 2740,
+      "trend": "+9% demo opens"
+    },
+    {
+      "id": "user-samira",
+      "fullName": "Samira Okafor",
+      "handle": "samirao",
+      "avatarUrl": "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTEwMDV8MHwxfHNlYXJjaHwxfHxzdGFydHVwJTIwcGl0Y2glMjBwcmVzZW50YXRpb258ZW58MXwwfHx8MTc5MzE4NjUxNnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "bio": "Community operator turning local founder groups into measurable networks.",
+      "headline": "Founder, SignalRoom",
+      "followers": 3475,
+      "trend": "+15% network intros"
+    }
+  ],
+  "pitches": [
+    {
+      "id": "pitch-pulsedesk",
+      "title": "PulseDesk",
+      "tagline": "AI triage for product feedback that turns support noise into prioritized roadmap signals.",
+      "description": "PulseDesk connects to support tickets, sales notes, and user interviews, then clusters recurring pain points into product opportunities. Founders can see which requests are revenue-linked, which problems are churn risks, and which roadmap items have the strongest evidence behind them. The first wedge is small B2B SaaS teams with fewer than five PMs.",
+      "category": "SaaS",
+      "stage": "Beta",
+      "demoUrl": "https://pitchlab.example.com/pulsedesk",
+      "videoEmbedUrl": "https://pitchlab.example.com/pulsedesk-demo",
+      "mediaUrl": "https://images.unsplash.com/photo-1587440871875-191322ee64b0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTEwMDV8MHwxfHNlYXJjaHwxfHxwcm9kdWN0JTIwZGVzaWduJTIwdGVhbXxlbnwxfDB8fHwxNzkzMTg2NTE2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "builderId": "user-aria",
+      "createdAt": "2026-10-22T10:30:00.000Z",
+      "views": 1840,
+      "score": 94
+    },
+    {
+      "id": "pitch-stacklens",
+      "title": "StackLens",
+      "tagline": "DevTools observability that explains dependency drift before it becomes a production incident.",
+      "description": "StackLens scans repositories and build logs to map dependency volatility, security exposure, and team ownership in one operating view. Instead of raw alerts, it produces a weekly engineering brief with concrete upgrade paths. The product targets platform teams that maintain multiple services and need decision-grade dependency intelligence.",
+      "category": "DevTools",
+      "stage": "Private Alpha",
+      "demoUrl": "https://pitchlab.example.com/stacklens",
+      "videoEmbedUrl": "https://pitchlab.example.com/stacklens-demo",
+      "mediaUrl": "https://images.unsplash.com/photo-1587620962725-abab7fe55159?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTEwMDV8MHwxfHNlYXJjaHwxfHxkZXZlbG9wZXIlMjBjb2RpbmclMjBsYXB0b3B8ZW58MXwwfHx8MTc5MzE4NjUxNnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "builderId": "user-omar",
+      "createdAt": "2026-10-21T13:12:00.000Z",
+      "views": 1265,
+      "score": 89
+    },
+    {
+      "id": "pitch-flowmint",
+      "title": "FlowMint",
+      "tagline": "Mobile onboarding experiments for non-technical growth teams with built-in UX review.",
+      "description": "FlowMint lets growth teams launch onboarding variants without waiting for app releases. Every flow includes a checklist for accessibility, copy clarity, and activation quality. The goal is to help subscription mobile apps test better first-week experiences while preserving product quality and brand consistency.",
+      "category": "Mobile",
+      "stage": "MVP",
+      "demoUrl": "https://pitchlab.example.com/flowmint",
+      "videoEmbedUrl": "https://pitchlab.example.com/flowmint-demo",
+      "mediaUrl": "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTEwMDV8MHwxfHNlYXJjaHwxfHxzdGFydHVwJTIwcGl0Y2glMjBwcmVzZW50YXRpb258ZW58MXwwfHx8MTc5MzE4NjUxNnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "builderId": "user-lena",
+      "createdAt": "2026-10-20T09:45:00.000Z",
+      "views": 980,
+      "score": 86
+    },
+    {
+      "id": "pitch-modelops-radar",
+      "title": "ModelOps Radar",
+      "tagline": "AI/ML governance briefs that tell teams which deployed models need attention today.",
+      "description": "ModelOps Radar monitors model performance, prompt changes, latency, and evaluation drift, then compiles a daily operations brief for product and engineering leaders. It focuses on actionability: what changed, why it matters, and who should respond. The first customers are AI-enabled SaaS companies with multiple customer-facing models.",
+      "category": "AI/ML",
+      "stage": "Pilot",
+      "demoUrl": "https://pitchlab.example.com/modelops-radar",
+      "videoEmbedUrl": "https://pitchlab.example.com/modelops-demo",
+      "mediaUrl": "https://images.unsplash.com/photo-1587620962725-abab7fe55159?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTEwMDV8MHwxfHNlYXJjaHwxfHxkZXZlbG9wZXIlMjBjb2RpbmclMjBsYXB0b3B8ZW58MXwwfHx8MTc5MzE4NjUxNnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "builderId": "user-noah",
+      "createdAt": "2026-10-18T16:22:00.000Z",
+      "views": 1510,
+      "score": 91
+    },
+    {
+      "id": "pitch-signalroom",
+      "title": "SignalRoom",
+      "tagline": "Founder community CRM that turns meetups into warm intros, follow-ups, and investor-ready proof.",
+      "description": "SignalRoom gives community operators a lightweight relationship graph for founder events. Attendees can opt into intros, share current asks, and receive post-event follow-up paths. Organizers get health metrics around helpfulness, repeat attendance, and high-signal collaborations without turning the community into a noisy social network.",
+      "category": "SaaS",
+      "stage": "Beta",
+      "demoUrl": "https://pitchlab.example.com/signalroom",
+      "videoEmbedUrl": "https://pitchlab.example.com/signalroom-demo",
+      "mediaUrl": "https://images.unsplash.com/photo-1675716921224-e087a0cca69a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5NTEwMDV8MHwxfHNlYXJjaHwxfHxuZXR3b3JraW5nJTIwbWVldHVwJTIwZm91bmRlcnN8ZW58MXwwfHx8MTc5MzE4NjUxNnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "builderId": "user-samira",
+      "createdAt": "2026-10-16T11:05:00.000Z",
+      "views": 1120,
+      "score": 88
+    }
+  ],
+  "comments": [
+    {
+      "id": "comment-1",
+      "pitchId": "pitch-pulsedesk",
+      "authorId": "user-omar",
+      "category": "Tech Stack",
+      "content": "Strong signal model. I suggest showing exactly how your clustering handles duplicate language across Intercom, Gong, and Slack so technical buyers trust the pipeline. A concrete integration diagram would reduce perceived implementation risk.",
+      "upvotes": 18,
+      "upvotedBy": [],
+      "moderation": {
+        "status": "approved",
+        "score": 94,
+        "autoTag": "Tech Stack"
+      },
+      "createdAt": "2026-10-22T12:45:00.000Z"
+    },
+    {
+      "id": "comment-2",
+      "pitchId": "pitch-pulsedesk",
+      "authorId": "user-lena",
+      "category": "UI/UX",
+      "content": "The positioning is clear, but the demo should include a before-and-after workflow. Consider adding a roadmap decision screen where a founder can approve, reject, or assign the synthesized insight to make the value feel tangible.",
+      "upvotes": 21,
+      "upvotedBy": [],
+      "moderation": {
+        "status": "approved",
+        "score": 96,
+        "autoTag": "UI/UX"
+      },
+      "createdAt": "2026-10-22T14:10:00.000Z"
+    },
+    {
+      "id": "comment-3",
+      "pitchId": "pitch-pulsedesk",
+      "authorId": "user-samira",
+      "category": "Business Model",
+      "content": "The wedge into small B2B SaaS is credible. I recommend testing pricing around number of connected feedback sources rather than seats, because the strongest buyer pain is signal fragmentation and not individual usage.",
+      "upvotes": 16,
+      "upvotedBy": [],
+      "moderation": {
+        "status": "approved",
+        "score": 91,
+        "autoTag": "Business Model"
+      },
+      "createdAt": "2026-10-22T15:40:00.000Z"
+    },
+    {
+      "id": "comment-4",
+      "pitchId": "pitch-stacklens",
+      "authorId": "user-noah",
+      "category": "Tech Stack",
+      "content": "This is compelling for platform teams. A useful next step would be showing a real dependency incident timeline and where StackLens would have warned the team earlier with concrete ownership recommendations.",
+      "upvotes": 14,
+      "upvotedBy": [],
+      "moderation": {
+        "status": "approved",
+        "score": 90,
+        "autoTag": "Tech Stack"
+      },
+      "createdAt": "2026-10-21T16:00:00.000Z"
+    },
+    {
+      "id": "comment-5",
+      "pitchId": "pitch-stacklens",
+      "authorId": "user-aria",
+      "category": "Business Model",
+      "content": "The weekly engineering brief sounds valuable, but I suggest clarifying whether the buyer is the VP Engineering, security lead, or platform team manager. Each will need a slightly different ROI story.",
+      "upvotes": 12,
+      "upvotedBy": [],
+      "moderation": {
+        "status": "approved",
+        "score": 88,
+        "autoTag": "Business Model"
+      },
+      "createdAt": "2026-10-21T17:12:00.000Z"
+    },
+    {
+      "id": "comment-6",
+      "pitchId": "pitch-flowmint",
+      "authorId": "user-samira",
+      "category": "UI/UX",
+      "content": "The no-release promise is strong. Consider adding templates by activation goal, such as trial conversion or first saved item, so teams start from a concrete experiment instead of a blank canvas.",
+      "upvotes": 19,
+      "upvotedBy": [],
+      "moderation": {
+        "status": "approved",
+        "score": 93,
+        "autoTag": "UI/UX"
+      },
+      "createdAt": "2026-10-20T12:15:00.000Z"
+    },
+    {
+      "id": "comment-7",
+      "pitchId": "pitch-modelops-radar",
+      "authorId": "user-omar",
+      "category": "General",
+      "content": "The daily brief angle makes this more executive-friendly than raw monitoring. I suggest adding one sample brief with severity, owner, and recommended action so the buyer immediately understands the operating cadence.",
+      "upvotes": 17,
+      "upvotedBy": [],
+      "moderation": {
+        "status": "approved",
+        "score": 92,
+        "autoTag": "General"
+      },
+      "createdAt": "2026-10-18T18:20:00.000Z"
+    },
+    {
+      "id": "comment-8",
+      "pitchId": "pitch-signalroom",
+      "authorId": "user-lena",
+      "category": "Business Model",
+      "content": "The community CRM framing is excellent. Consider a paid organizer tier tied to event volume and a founder-visible profile that makes opt-in intros feel valuable instead of administrative.",
+      "upvotes": 13,
+      "upvotedBy": [],
+      "moderation": {
+        "status": "approved",
+        "score": 89,
+        "autoTag": "Business Model"
+      },
+      "createdAt": "2026-10-16T14:00:00.000Z"
+    }
+  ],
+  "messages": [
+    {
+      "id": "message-1",
+      "pitchId": "pitch-pulsedesk",
+      "senderId": "user-current",
+      "recipientId": "user-lena",
+      "sourceCommentId": "comment-2",
+      "content": "Your before-and-after workflow point is useful. Would you be open to reviewing a revised demo storyboard?",
+      "createdAt": "2026-10-22T16:10:00.000Z"
+    },
+    {
+      "id": "message-2",
+      "pitchId": "pitch-pulsedesk",
+      "senderId": "user-lena",
+      "recipientId": "user-current",
+      "sourceCommentId": "comment-2",
+      "content": "Yes. Send the storyboard and I can mark where the activation moment should land.",
+      "createdAt": "2026-10-22T16:18:00.000Z"
+    }
+  ],
+  "follows": [
+    {
+      "id": "follow-1",
+      "followerId": "user-current",
+      "builderId": "user-aria",
+      "createdAt": "2026-10-22T08:00:00.000Z"
+    },
+    {
+      "id": "follow-2",
+      "followerId": "user-current",
+      "builderId": "user-lena",
+      "createdAt": "2026-10-21T08:00:00.000Z"
+    }
+  ],
+  "competitionVotes": {
+    "counter": 12847,
+    "events": []
+  }
+}

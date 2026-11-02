@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tatbiq App</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+<!-- tatbiq-unsplash-credits -->
+<style>
+  #tq-unsplash-credit {
+    position: fixed;
+    z-index: 2147483646;
+    display: none;
+    max-width: min(280px, calc(100vw - 16px));
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: rgba(16, 16, 20, 0.82);
+    color: #fff;
+    font: 11px/1.3 -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    pointer-events: auto;
+  }
+  #tq-unsplash-credit a { color: #fff; text-decoration: underline; }
+</style>
+<script>
+(function () {
+  var tip = null;
+  var credits = null;
+  var fallback = 'https://unsplash.com/?utm_source=tatbiq&utm_medium=referral';
+
+  function slug(url) {
+    var match = String(url || '').match(/photo-([a-zA-Z0-9_-]+)/);
+    return match ? match[1] : '';
+  }
+
+  function safeHref(url) {
+    try {
+      var parsed = new URL(url, 'https://unsplash.com');
+      var host = parsed.hostname;
+      if (parsed.protocol === 'https:' && (host === 'unsplash.com' || host.slice(-12) === '.unsplash.com')) {
+        return parsed.href;
+      }
+    } catch (err) {}
+    return fallback;
+  }
+
+  function load() {
+    if (credits) return Promise.resolve(credits);
+    return fetch('/unsplash-credits.json', { credentials: 'same-origin' })
+      .then(function (response) { return response.ok ? response.json() : []; })
+      .then(function (data) {
+        credits = {};
+        (Array.isArray(data) ? data : []).forEach(function (entry) {
+          if (entry && entry.photo_id && entry.photographer) credits[entry.photo_id] = entry;
+        });
+        return credits;
+      })
+      .catch(function () { credits = {}; return credits; });
+  }
+
+  function hitFrom(node) {
+    var el = node && node.nodeType === 1 ? node : (node && node.parentElement);
+    for (var i = 0; el && el !== document.body && i < 8; i++, el = el.parentElement) {
+      if (el.id === 'tq-unsplash-credit') return null;
+      if (el.tagName === 'IMG') {
+        var src = el.currentSrc || el.getAttribute('src') || '';
+        if (src.indexOf('images.unsplash.com') !== -1) return { url: src, box: el };
+      }
+      var bg = '';
+      try { bg = window.getComputedStyle(el).backgroundImage || ''; } catch (err) {}
+      var match = String(bg).match(/url\(["']?(https:\/\/images\.unsplash\.com\/[^"')]+)/);
+      if (match) return { url: match[1], box: el };
+    }
+    return null;
+  }
+
+  function hide() {
+    if (tip) tip.style.display = 'none';
+  }
+
+  function show(entry, box) {
+    if (!tip) {
+      tip = document.createElement('div');
+      tip.id = 'tq-unsplash-credit';
+      document.body.appendChild(tip);
+    }
+    var ar = (document.documentElement.getAttribute('lang') || '').toLowerCase().indexOf('ar') === 0
+      || document.documentElement.getAttribute('dir') === 'rtl';
+    var who = document.createElement('a');
+    who.href = safeHref(entry.photographer_url);
+    who.target = '_blank';
+    who.rel = 'noopener noreferrer';
+    who.textContent = entry.photographer;
+    var site = document.createElement('a');
+    site.href = safeHref(entry.unsplash_url);
+    site.target = '_blank';
+    site.rel = 'noopener noreferrer';
+    site.textContent = 'Unsplash';
+    tip.replaceChildren();
+    tip.append(ar ? 'صورة من تصوير ' : 'Photo by ', who, ar ? ' على ' : ' on ', site);
+    var rect = box.getBoundingClientRect();
+    var left = Math.max(8, rect.left + 8);
+    var top = rect.bottom - 28;
+    if (top < 8) top = Math.max(8, rect.top + 8);
+    if (left > window.innerWidth - 120) left = Math.max(8, window.innerWidth - 288);
+    tip.style.left = left + 'px';
+    tip.style.top = top + 'px';
+    tip.style.display = 'block';
+  }
+
+  function onPoint(event) {
+    var hit = hitFrom(event.target);
+    if (!hit) {
+      if (tip && event.target !== tip && !(tip.contains && tip.contains(event.target))) hide();
+      return;
+    }
+    var id = slug(hit.url);
+    var box = hit.box;
+    load().then(function (map) {
+      if (!map[id]) { hide(); return; }
+      show(map[id], box);
+    });
+  }
+
+  document.addEventListener('pointerover', onPoint, true);
+  document.addEventListener('pointerdown', onPoint, true);
+  document.addEventListener('pointerout', function (event) {
+    var next = event.relatedTarget;
+    if (tip && (next === tip || (tip.contains && tip.contains(next)))) return;
+    if (hitFrom(next)) return;
+    hide();
+  }, true);
+  window.addEventListener('scroll', hide, true);
+})();
+</script>
+  </body>
+</html>
